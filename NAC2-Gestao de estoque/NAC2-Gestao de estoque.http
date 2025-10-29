@@ -1,0 +1,6 @@
+@NAC2_Gestao_de_estoque_HostAddress = http://localhost:5133
+
+GET {{NAC2_Gestao_de_estoque_HostAddress}}/
+Accept: application/json
+
+###
