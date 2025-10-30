@@ -1,9 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using NAC2_Gestao_de_estoque.Models.Enums;
-
-
 namespace NAC2_Gestao_de_estoque.Models;
 
 
