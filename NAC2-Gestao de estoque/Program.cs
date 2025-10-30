@@ -57,4 +57,36 @@ app.MapGet("/relatorio/produtos-abaixo-minimo", (RelatorioService relatorioServi
     return relatorioService.ProdutosAbaixoDoMinimo();
 });
 
+app.MapPost("/movimentacao", (MovimentacaoEstoque mov, MovimentacaoService service) =>
+{
+    try
+    {
+        service.RegistrarMovimentacao(mov);
+        return Results.Ok("Movimentação registrada com sucesso.");
+    }
+    catch (MovimentacaoException ex)
+    {
+        return Results.BadRequest(ex.Message);
+    }
+});
+
+app.MapPost("/produto", (Produto produto, ProdutoService service) =>
+{
+    try
+    {
+        // Exemplo: para perecível, envie dataValidade no body se necessário
+        service.CadastrarProduto(produto);
+        return Results.Ok("Produto cadastrado com sucesso.");
+    }
+    catch (ProdutoException ex)
+    {
+        return Results.BadRequest(ex.Message);
+    }
+});
+
+app.MapGet("/relatorio/alertas-estoque-minimo", (RelatorioService relatorioService) =>
+{
+    return relatorioService.GerarAlertasEstoqueMinimo();
+});
+
 app.Run();

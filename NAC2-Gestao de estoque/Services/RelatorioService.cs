@@ -32,5 +32,21 @@ namespace NAC2_Gestao_de_estoque.Services
         {
             return _context.Produtos.Where(p => p.QuantidadeAtual < p.QuantidadeMinimaEstoque).ToList();
         }
+
+        public List<AlertaEstoque> GerarAlertasEstoqueMinimo()
+        {
+            var produtosAlerta = _context.Produtos.Where(p => p.QuantidadeAtual < p.QuantidadeMinimaEstoque).ToList();
+            var alertas = new List<AlertaEstoque>();
+            foreach (var produto in produtosAlerta)
+            {
+                alertas.Add(new AlertaEstoque
+                {
+                    SKUProduto = produto.SKU,
+                    Mensagem = $"Produto {produto.Nome} abaixo do estoque mínimo!",
+                    DataAlerta = DateTime.Now
+                });
+            }
+            return alertas;
+        }
     }
 }
